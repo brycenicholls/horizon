@@ -27,6 +27,7 @@ urlpatterns = [
         views.download_clouds_yaml_file, name='clouds.yaml'),
     url(r'^openrc/$', views.download_rc_file, name='openrc'),
     url(r'^openrcv2/$', views.download_rc_file_v2, name='openrcv2'),
+    url(r'^openrcsso/$', views.download_rc_file_sso, name='openrcsso'),
     url(r'^view_credentials/$', views.CredentialsView.as_view(),
         name='view_credentials'),
     url(r'^recreate_ec2_credentials/$',

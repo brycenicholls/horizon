@@ -305,6 +305,10 @@ USER_MENU_LINKS = [
      'icon_classes': ['fa-download', ],
      'url': 'horizon:project:api_access:openrcv2'
      },
+    {'name': _('OpenStack SSO RC File v3'),
+     'icon_classes': ['fa-download', ],
+     'url': 'horizon:project:api_access:openrcsso'
+     },
     {'name': _('OpenStack RC File v3'),
      'icon_classes': ['fa-download', ],
      'url': 'horizon:project:api_access:openrc'

@@ -51,6 +51,14 @@ class DownloadCloudsYaml(tables.LinkAction):
     icon = "download"
     url = "horizon:project:api_access:clouds.yaml"
 
+class DownloadOpenRCSSO(tables.LinkAction):
+    name = "download_openrc_sso"
+    verbose_name = _("OpenStack RC SSO File (Identity API v3)")
+    verbose_name_plural = _("OpenStack RC File (Identity API v3)")
+    icon = "download"
+    url = "horizon:project:api_access:openrcsso"
+    def allowed(self, request, datum=None):
+        return utils.get_keystone_version() >= 3
 
 class DownloadOpenRC(tables.LinkAction):
     name = "download_openrc"
@@ -119,6 +127,7 @@ class EndpointsTable(tables.DataTable):
         table_actions = (ViewCredentials, RecreateCredentials)
         table_actions_menu = (DownloadCloudsYaml,
                               DownloadOpenRCv2,
+                              DownloadOpenRCSSO,
                               DownloadOpenRC,
                               DownloadEC2)
         table_actions_menu_label = _('Download OpenStack RC File')

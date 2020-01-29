@@ -125,6 +125,25 @@ def download_rc_file_v2(request):
     return _download_rc_file_for_template(request, context, template)
 
 
+def download_rc_file_sso(request):
+    template = 'project/api_access/openrc_sso.sh.template'
+    context = _get_openrc_credentials(request)
+
+    # make v3 specific changes
+    context['user_domain_name'] = request.user.user_domain_name
+    try:
+        project_domain_id = request.user.token.project['domain_id']
+    except KeyError:
+        project_domain_id = ''
+    context['project_domain_id'] = project_domain_id
+    # sanity fix for removing v2.0 from the url if present
+    context['auth_url'], _ = utils.fix_auth_url_version_prefix(
+        context['auth_url'])
+    context['os_identity_api_version'] = 3
+    context['os_auth_version'] = 3
+    return _download_rc_file_for_template(request, context, template) 
+
+
 def download_rc_file(request):
     template = 'project/api_access/openrc.sh.template'
     context = _get_openrc_credentials(request)
